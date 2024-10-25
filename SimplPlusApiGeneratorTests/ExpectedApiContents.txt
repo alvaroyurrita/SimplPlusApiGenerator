@@ -1,0 +1,79 @@
+namespace SampleSimplSharpLibrary;
+{
+     class SampleClass 
+    {
+        // class delegates
+
+        // class events
+        EventHandler SampleEvent ( SampleClass sender, EventArgs e );
+        EventHandler SampleComplexEvent ( SampleClass sender, MyEventArgs e );
+
+        // class functions
+        FUNCTION SampleVoidMethod ();
+        STRING_FUNCTION SampleStringMethod ();
+        SIMPLSHARPSTRING_FUNCTION SampleSimplSharpStringMethod ();
+        SIGNED_LONG_INTEGER_FUNCTION SampleIntMethod ();
+        LONG_INTEGER_FUNCTION SampleUintMethod ();
+        SIGNED_INTEGER_FUNCTION SampleShortMethod ();
+        INTEGER_FUNCTION SampleUshortMethod ();
+        FUNCTION FireSampleEvent ();
+        FUNCTION FireSampleComplexEvent ();
+        SIGNED_LONG_INTEGER_FUNCTION GetHashCode ();
+        STRING_FUNCTION ToString ();
+
+        // class variables
+        INTEGER __class_id__;
+
+        // class properties
+        STRING SampleString[];
+        SIMPLSHARPSTRING SampleSimplSharpString[];
+        SIGNED_LONG_INTEGER SampleInt;
+        LONG_INTEGER SampleUint;
+        SIGNED_INTEGER SampleShort;
+        INTEGER SampleUshort;
+    };
+
+     class SampleStructure 
+    {
+        // class delegates
+
+        // class events
+
+        // class functions
+        STRING_FUNCTION ToString ();
+        SIGNED_LONG_INTEGER_FUNCTION GetHashCode ();
+
+        // class variables
+        STRING SampleStructureString[];
+        SIMPLSHARPSTRING SampleStructureSimplSharpString[];
+        SIGNED_LONG_INTEGER SampleStructureInt;
+        LONG_INTEGER SampleStructureUint;
+        SIGNED_INTEGER SampleStructureShort;
+        INTEGER SampleStructureUshort;
+
+        // class properties
+    };
+
+     class MyEventArgs 
+    {
+        // class delegates
+
+        // class events
+
+        // class functions
+        SIGNED_LONG_INTEGER_FUNCTION GetHashCode ();
+        STRING_FUNCTION ToString ();
+
+        // class variables
+        INTEGER __class_id__;
+
+        // class properties
+        STRING EventString[];
+        SIMPLSHARPSTRING EventSimplSharpString[];
+        SIGNED_LONG_INTEGER EventInt;
+        LONG_INTEGER EventUint;
+        SIGNED_INTEGER EventShort;
+        INTEGER EventUshort;
+    };
+}
+
