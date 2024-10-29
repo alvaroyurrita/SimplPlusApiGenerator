@@ -19,13 +19,15 @@ namespace SimplPlusApiGenerator.Tests
         public void CreateApiTest()
         {
             var sampleClzPath = Path.Combine(currentPath, "SampleSimplSharpLibrary.clz");
-            Program.Main(new[] { sampleClzPath });
+            var result = Program.Main(new[] { sampleClzPath });
 
             var apiExists = File.Exists(Path.Combine(currentPath, "SPlsWork", "SampleSimplSharpLibrary.api"));
             var expectedApiContents = File.ReadAllText(Path.Combine(currentPath, "ExpectedApiContents.txt"));
             var actualApiContents = File.ReadAllText(Path.Combine(currentPath, "SPlsWork", "SampleSimplSharpLibrary.api"));
             Assert.That(apiExists);
             Assert.That(actualApiContents, Is.EqualTo(expectedApiContents));
+            Assert.That(result, Is.EqualTo(0));
+
         }
         [Test()]
         public void CreateApiTest_InvalidPath()
@@ -37,14 +39,29 @@ namespace SimplPlusApiGenerator.Tests
         [Test()]
         public void CreateApiTest_PartialPath()
         {
-            var sampleClzPath = Path.Combine("SampleSimplSharpLibrary.clz");
-            Program.Main(new[] { sampleClzPath });
+            var sampleClzPath ="SampleSimplSharpLibrary.clz";
+            var result = Program.Main(new[] { sampleClzPath });
 
             var apiExists = File.Exists(Path.Combine(currentPath, "SPlsWork", "SampleSimplSharpLibrary.api"));
             var expectedApiContents = File.ReadAllText(Path.Combine(currentPath, "ExpectedApiContents.txt"));
             var actualApiContents = File.ReadAllText(Path.Combine(currentPath, "SPlsWork", "SampleSimplSharpLibrary.api"));
             Assert.That(apiExists);
             Assert.That(actualApiContents, Is.EqualTo(expectedApiContents));
+            Assert.That(result, Is.EqualTo(0));
+        }
+        [Test()]
+        public void CreateApiTest_PartialPath_AndSimplDirecotry()
+        {
+            var sampleClzPath = "SampleSimplSharpLibrary.clz";
+            var simplDiecotry = "C:\\Program Files (x86)\\Crestron\\Simpl";
+            var result = Program.Main(new[] { sampleClzPath, simplDiecotry });
+
+            var apiExists = File.Exists(Path.Combine(currentPath, "SPlsWork", "SampleSimplSharpLibrary.api"));
+            var expectedApiContents = File.ReadAllText(Path.Combine(currentPath, "ExpectedApiContents.txt"));
+            var actualApiContents = File.ReadAllText(Path.Combine(currentPath, "SPlsWork", "SampleSimplSharpLibrary.api"));
+            Assert.That(apiExists);
+            Assert.That(actualApiContents, Is.EqualTo(expectedApiContents));
+            Assert.That(result, Is.EqualTo(0));
         }
         [Test()]
         public void CreateApiTest_NoArgumenth()
@@ -57,6 +74,22 @@ namespace SimplPlusApiGenerator.Tests
         {
             var invalidClzPath = Path.Combine(currentPath, "BadClz.clz");
             var result = Program.Main(new[] { invalidClzPath });
+            Assert.That(result, Is.EqualTo(-1));
+        }
+        [Test()]
+        public void CreateApiTest_PartialPath_BadSimplDirecotry()
+        {
+            var sampleClzPath = "SampleSimplSharpLibrary.clz";
+            var badSimplPath = "C:\\IDontExist";
+            var result = Program.Main(new[] { sampleClzPath, badSimplPath });
+            Assert.That(result, Is.EqualTo(-1));
+        }
+        [Test()]
+        public void CreateApiTest_PartialPath_NoSPlusUtilities()
+        {
+            var sampleClzPath = "SampleSimplSharpLibrary.clz";
+            var badSimplPath = "C:\\Program Files (x86)\\Crestron";
+            var result = Program.Main(new[] { sampleClzPath, badSimplPath });
             Assert.That(result, Is.EqualTo(-1));
         }
         [Test()]
