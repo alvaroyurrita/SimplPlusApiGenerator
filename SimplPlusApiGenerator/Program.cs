@@ -1,5 +1,4 @@
-﻿using SPlusUtilities;
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
 
@@ -63,13 +62,12 @@ namespace SimplPlusApiGenerator
             var apiPath = Path.Combine(splsWorkDirectory, $"{projectName}.api");
             try
             {
-                var SPlusHeader2 = new SPlusHeader2(splusUtilitiesPath);
-                SPlusHeader2.CreateSPlusHeader(projectDllPath, apiPath);
-                var b = SPlusHeader2.GetOutputList();
-                var a = SPlusHeader2.GetErrorList();
-                if (a.Count == 0) { return 0; }
+                var SPlusHeader = new SPlusHeader2(splusUtilitiesPath);
+                SPlusHeader.CreateSPlusHeader(projectDllPath, apiPath);
+                var errorList = SPlusHeader.GetErrorList();
+                if (errorList.Count == 0) { return 0; }
                 Console.WriteLine("API Creation Failed");
-                foreach (var error in a) { Console.WriteLine(error); }
+                foreach (var error in errorList) { Console.WriteLine(error); }
             }
             catch (Exception e)
             {
